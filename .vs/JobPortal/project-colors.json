@@ -1,0 +1,56 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "0d6cdfa0-770c-4438-b0ce-f320566dacf7": {
+      "ProjectGuid": "0d6cdfa0-770c-4438-b0ce-f320566dacf7",
+      "DisplayName": "Emplooyer.WebAPI",
+      "ColorIndex": 0
+    },
+    "ba06e6ea-4ce7-4dcf-81c1-d0a044ba5246": {
+      "ProjectGuid": "ba06e6ea-4ce7-4dcf-81c1-d0a044ba5246",
+      "DisplayName": "Identity.WebAPI",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "bbc6dcf2-dd4f-4d11-bd53-a182b48df7d1": {
+      "ProjectGuid": "bbc6dcf2-dd4f-4d11-bd53-a182b48df7d1",
+      "DisplayName": "Employers.WebAPI",
+      "ColorIndex": 2
+    },
+    "c9feeeb4-2330-4495-b76d-2e313384c831": {
+      "ProjectGuid": "c9feeeb4-2330-4495-b76d-2e313384c831",
+      "DisplayName": "Employer.WEBAPI",
+      "ColorIndex": 3
+    },
+    "b0dd73f7-f02f-40b2-966d-a01cccc19f16": {
+      "ProjectGuid": "b0dd73f7-f02f-40b2-966d-a01cccc19f16",
+      "DisplayName": "JobSeeker.WebAPI",
+      "ColorIndex": 4
+    },
+    "23c75fb3-7b52-4579-83c1-313e7982feae": {
+      "ProjectGuid": "23c75fb3-7b52-4579-83c1-313e7982feae",
+      "DisplayName": "Solution Items",
+      "ColorIndex": 5
+    },
+    "d633648d-3605-4410-80a8-7223b77a8228": {
+      "ProjectGuid": "d633648d-3605-4410-80a8-7223b77a8228",
+      "DisplayName": "ApiGateway",
+      "ColorIndex": 6
+    },
+    "3200e5e3-91a3-418c-b64c-6a3b269364cc": {
+      "ProjectGuid": "3200e5e3-91a3-418c-b64c-6a3b269364cc",
+      "DisplayName": "WebApplication1",
+      "ColorIndex": 7
+    },
+    "b5716101-a3f4-4935-a942-1338d1170ded": {
+      "ProjectGuid": "b5716101-a3f4-4935-a942-1338d1170ded",
+      "DisplayName": "Api.Gateway",
+      "ColorIndex": 8
+    }
+  },
+  "NextColorIndex": 9
+}

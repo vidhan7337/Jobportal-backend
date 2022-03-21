@@ -1,0 +1,213 @@
+{
+  "Routes": [
+    
+    {
+      "DownstreamPathTemplate": "/api/Vacancies",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/vacancies",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Vacancies/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/vacancies/{id}",
+      "UpstreamHttpMethod": [ "PUT", "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Vacancies/{searchItem}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/vacancies/{searchItem}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Vacancies/submitted/{org}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/vacancies/submitted/{org}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+   
+    {
+      "DownstreamPathTemplate": "/api/Employer",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employer",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Employer/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employer/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Employer/{email}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employer/{email}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    
+    {
+      "DownstreamPathTemplate": "/api/Identity/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44306"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Identity/register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44306"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/register",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+  
+    {
+      "DownstreamPathTemplate": "/api/Identity/changepassword/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44306"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/changepassword/{id}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+   
+    {
+      "DownstreamPathTemplate": "/api/JonSeeker/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/jobseeker/{id}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/JonSeeker",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/jobseeker",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/Qualification/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/qualification/{id}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/Qualification",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/qualification",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/UserExperince/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/userexperince/{id}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/UserExperince",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/userexperince",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/VacancyRequestController/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/vacancyrequest/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ]
+}

@@ -2,26 +2,28 @@
 using JobSeeker.WebAPI.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace JobSeeker.WebAPI.Controllers
 {
-    [Route("api/JobSeeker/{userid:int}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class QualificationController : ControllerBase
     {
-       
+
         private IQualificationsRepository _qualiRepo;
 
 
-        public QualificationController( IQualificationsRepository qua)
+        public QualificationController(IQualificationsRepository qua)
         {
-            
+
             _qualiRepo = qua;
-            
+
         }
+        //add new qualification
         [HttpPost]
-        public async Task<ActionResult<Qualifications>> AddJobseeker(Qualifications user)
+        public async Task<ActionResult<Qualifications>> AddQua(Qualifications user)
         {
             TryValidateModel(user);
             if (!ModelState.IsValid)
@@ -30,18 +32,20 @@ namespace JobSeeker.WebAPI.Controllers
             }
             else
             {
-                var result = await _qualiRepo.AddUser(user);
+                var result = await _qualiRepo.AddQualification(user);
                 return Created("Success", result);
             }
         }
+        //update qualification
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateJobseeker([FromBody] Qualifications user, [FromRoute] int id, int userid)
+        public async Task<IActionResult> UpdateQua([FromBody] Qualifications user, [FromRoute] int id)
         {
-            await _qualiRepo.UpdateUser(id, user,userid);
+            await _qualiRepo.UpdateUser(id, user);
             return Ok();
         }
+        //delete qualification
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteJobSeeker(int id)
+        public async Task<IActionResult> DeleteQua(int id)
         {
             var item = await _qualiRepo.GetUser(id);
             if (item == null)
@@ -54,8 +58,9 @@ namespace JobSeeker.WebAPI.Controllers
                 return NoContent();
             }
         }
+        //get single qualification
         [HttpGet("{id}")]
-        public async Task<ActionResult<Qualifications>> GetJobSeeker(int id)
+        public async Task<ActionResult<Qualifications>> GetQualification(int id)
         {
             var item = await _qualiRepo.GetUser(id);
             if (item == null)
@@ -66,6 +71,13 @@ namespace JobSeeker.WebAPI.Controllers
             {
                 return Ok(item);
             }
+        }
+        //get all qualification of jobseeker
+        [HttpGet("all/{userid}")]
+
+        public ActionResult<List<Qualifications>> GetAllQualification(int userid)
+        {
+            return Ok(_qualiRepo.GetAll(userid));
         }
     }
 }

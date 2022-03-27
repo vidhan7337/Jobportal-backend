@@ -9,7 +9,8 @@ namespace Employer.WEBAPI.Data
         public EmployerContext(DbContextOptions<EmployerContext> options) : base(options) { }
         public DbSet<EmployerDetails> Employeers { get; set; }
         public DbSet<VacancyDetails> Vacancies { get; set; }
-       protected override void OnModelCreating(ModelBuilder builder)
+       //making column unique
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<EmployerDetails>()
                 .HasIndex(u => u.CompanyEmail)

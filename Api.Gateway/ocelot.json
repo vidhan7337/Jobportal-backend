@@ -1,6 +1,6 @@
 {
   "Routes": [
-    
+    //vacancies
     {
       "DownstreamPathTemplate": "/api/Vacancies",
       "DownstreamScheme": "https",
@@ -10,8 +10,12 @@
           "Port": "44314"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/vacancies",
-      "UpstreamHttpMethod": [ "GET", "POST" ]
+      "UpstreamHttpMethod": [ "POST", "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/Vacancies/{id}",
@@ -22,6 +26,10 @@
           "Port": "44314"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/vacancies/{id}",
       "UpstreamHttpMethod": [ "PUT", "GET", "DELETE" ]
     },
@@ -34,6 +42,10 @@
           "Port": "44314"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/vacancies/{searchItem}",
       "UpstreamHttpMethod": [ "GET" ]
     },
@@ -46,10 +58,14 @@
           "Port": "44314"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/vacancies/submitted/{org}",
       "UpstreamHttpMethod": [ "GET" ]
     },
-   
+    //employer
     {
       "DownstreamPathTemplate": "/api/Employer",
       "DownstreamScheme": "https",
@@ -59,6 +75,10 @@
           "Port": "44314"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/employer",
       "UpstreamHttpMethod": [ "POST" ]
     },
@@ -71,6 +91,10 @@
           "Port": "44314"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/employer/{id}",
       "UpstreamHttpMethod": [ "PUT" ]
     },
@@ -83,10 +107,30 @@
           "Port": "44314"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/employer/{email}",
       "UpstreamHttpMethod": [ "GET" ]
     },
-    
+    {
+      "DownstreamPathTemplate": "/viewcompany/{org}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44314"
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/viewcompany/{org}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //identity module
     {
       "DownstreamPathTemplate": "/api/Identity/login",
       "DownstreamScheme": "https",
@@ -111,7 +155,6 @@
       "UpstreamPathTemplate": "/gateway/register",
       "UpstreamHttpMethod": [ "POST" ]
     },
-  
     {
       "DownstreamPathTemplate": "/api/Identity/changepassword/{id}",
       "DownstreamScheme": "https",
@@ -122,11 +165,24 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/changepassword/{id}",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "PUT" ]
     },
-   
     {
-      "DownstreamPathTemplate": "/api/JonSeeker/{id}",
+      "DownstreamPathTemplate": "/api/Identity/getpassword/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44306"
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/getpassword/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //jobseeker
+    {
+      "DownstreamPathTemplate": "/api/JobSeeker/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -134,11 +190,16 @@
           "Port": "44368"
         }
       ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/jobseeker/{id}",
       "UpstreamHttpMethod": [ "PUT", "DELETE", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/JonSeeker",
+      "DownstreamPathTemplate": "/api/JobSeeker",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -146,11 +207,16 @@
           "Port": "44368"
         }
       ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/jobseeker",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/Qualification/{id}",
+      "DownstreamPathTemplate": "/api/JobSeeker/getbyemail/{email}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -158,11 +224,35 @@
           "Port": "44368"
         }
       ],
-      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/qualification/{id}",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/jobseeker/getbyemail/{email}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //qualification
+    {
+      "DownstreamPathTemplate": "/api/Qualification/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/qualification/{id}",
       "UpstreamHttpMethod": [ "PUT", "DELETE", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/Qualification",
+      "DownstreamPathTemplate": "/api/Qualification",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -170,11 +260,16 @@
           "Port": "44368"
         }
       ],
-      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/qualification",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/qualification",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/UserExperince/{id}",
+      "DownstreamPathTemplate": "/api/Qualification/all/{userid}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -182,11 +277,32 @@
           "Port": "44368"
         }
       ],
-      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/userexperince/{id}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/qualification/all/{userid}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //experience
+    {
+      "DownstreamPathTemplate": "/api/UserExperince/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/userexperince/{id}",
       "UpstreamHttpMethod": [ "PUT", "DELETE", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/JonSeeker/{userid}/UserExperince",
+      "DownstreamPathTemplate": "/api/UserExperince",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -194,11 +310,15 @@
           "Port": "44368"
         }
       ],
-      "UpstreamPathTemplate": "/gateway/jobseeker/{searchid}/userexperince",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/userexperince",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/VacancyRequestController/{id}",
+      "DownstreamPathTemplate": "/api/UserExperince/all/{userid}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -206,7 +326,62 @@
           "Port": "44368"
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/userexperince/all/{userid}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //vacancy request
+
+    {
+      "DownstreamPathTemplate": "/api/VacancyRequestContoller/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/gateway/vacancyrequest/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/VacancyRequestContoller",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/vacancyrequest",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/vacancyapplied/{userid}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44368"
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamPathTemplate": "/gateway/vacancyapplied/{userid}",
       "UpstreamHttpMethod": [ "GET" ]
     }
   ]

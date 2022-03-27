@@ -20,7 +20,7 @@ namespace Employer.WEBAPI.Controllers
             _repository = repo;
         }
 
-        //[Authorize(Roles = "Employer")]
+        // add new vacancy
         [HttpPost]
 
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -38,16 +38,16 @@ namespace Employer.WEBAPI.Controllers
                 return Created("Success", result);
             }
         }
-        //[Authorize(Roles = "Employer")]
+        //update vacancy
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateVacancy([FromBody] VacancyDetails vac, [FromRoute] int id)
         {
             await _repository.UpdateVacancyAsync(id, vac);
             return Ok();
         }
-       // [Authorize(Roles = "Employer")]
+       
         [HttpDelete("{id:int}")]
-
+        //delete vacancy
         public async Task<IActionResult> DeleteVacancy(int id)
         {
             var item = await _repository.GetVacancyByIDAsync(id);
@@ -59,14 +59,14 @@ namespace Employer.WEBAPI.Controllers
                 return NoContent();
             }
         }
-        //[Authorize(Roles = "JobSeeker")]
+        //get all vacancies to show jobseeker
         [HttpGet]
 
-        public ActionResult<List<VacancyDetails>> GetVacancies()
+        public ActionResult<ResponseModel> GetVacancies(string? search, decimal? maxsalary, decimal? minsalary, string? sortby, int page)
         {
-            return Ok(_repository.GetAllVacanciesAsync());
+            return Ok(_repository.GetAllVacanciesAsync(search,minsalary,maxsalary,sortby,page));
         }
-        //[Authorize(Roles = "Employer")]
+        //get single vacancy by id
         [HttpGet("{id:int}")]
 
         public async Task<ActionResult<VacancyDetails>> GetVacancyByID(int id)
@@ -77,7 +77,7 @@ namespace Employer.WEBAPI.Controllers
             else
                 return Ok(item);
         }
-        //[Authorize(Roles = "JobSeeker")]
+        //search vacancy by job description or company name
         [HttpGet("{searchItem}")]
 
         public ActionResult<List<VacancyDetails>> GetSearchedVacancy([FromRoute]string searchItem)
@@ -85,11 +85,11 @@ namespace Employer.WEBAPI.Controllers
             return Ok(_repository.GetAllSearchedVacanciesAsync(searchItem));
 
         }
-        //[Authorize(Roles ="Employer")]
+        //get submitted vacancies to show employer
         [HttpGet("submitted/{org}")]
-        public ActionResult<List<VacancyDetails>> GetAllSubmittedVacancies([FromRoute]string org)
+        public ActionResult<ResponseModel> GetAllSubmittedVacancies(string org, decimal? maxsalary,decimal? minsalary, string? sortby, int page)
         {
-            return Ok(_repository.SubmittedVacancy(org));
+            return Ok(_repository.SubmittedVacancy(org,minsalary,maxsalary,sortby,page));
         }
     }  
 }

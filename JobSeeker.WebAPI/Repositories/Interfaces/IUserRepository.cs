@@ -9,6 +9,7 @@ namespace JobSeeker.WebAPI.Repositories
         Task UpdateUser(int id, UserModel user);
         Task DeleteUser(int id);
         Task<UserModel> GetUser(int id);
+        Task<UserModel> GetJobSeekerByIDAsync(string email);
 
 
     }

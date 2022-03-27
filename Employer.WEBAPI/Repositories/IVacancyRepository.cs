@@ -6,7 +6,7 @@ namespace Employer.WEBAPI.Repositories
 {
     public interface IVacancyRepository
     {
-        List<VacancyDetails> GetAllVacanciesAsync();
+        ResponseModel GetAllVacanciesAsync(string? search, decimal? minsalary, decimal? maxsalary, string? sortby, int page);
         Task<VacancyDetails> GetVacancyByIDAsync(int vacId);
         Task<VacancyDetails> AddVacancyAsync(VacancyDetails vacancy);
         Task UpdateVacancyAsync(int vacId, VacancyDetails vacancy);
@@ -14,6 +14,6 @@ namespace Employer.WEBAPI.Repositories
         Task DeleteVacancyAsync(int vacId);
 
         List<VacancyDetails> GetAllSearchedVacanciesAsync(string search);
-        List<VacancyDetails> SubmittedVacancy(string org);
+        ResponseModel SubmittedVacancy(string org,decimal? minsalary, decimal? maxsalary, string? sortby, int page);
     }
 }

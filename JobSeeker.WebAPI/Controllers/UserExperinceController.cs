@@ -2,11 +2,12 @@
 using JobSeeker.WebAPI.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace JobSeeker.WebAPI.Controllers
 {
-    [Route("api/JobSeeker/{userid:int}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserExperinceController : ControllerBase
     {
@@ -18,6 +19,7 @@ namespace JobSeeker.WebAPI.Controllers
           
             _expRepo = ex;
         }
+        //add new experience
         [HttpPost]
         public async Task<ActionResult<UserModel>> AddExperience(UserExperiences user)
         {
@@ -32,14 +34,16 @@ namespace JobSeeker.WebAPI.Controllers
                 return Created("Success", result);
             }
         }
+        //update experience
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateJobseeker([FromBody] UserExperiences user, [FromRoute] int id, int userid)
+        public async Task<IActionResult> UpdateExp([FromBody] UserExperiences user, [FromRoute] int id)
         {
-            await _expRepo.UpdateUser(id, user,userid);
+            await _expRepo.UpdateUser(id, user);
             return Ok();
         }
+        //delete experience
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteJobSeeker(int id)
+        public async Task<IActionResult> DeleteExp(int id)
         {
             var item = await _expRepo.GetUser(id);
             if (item == null)
@@ -52,8 +56,9 @@ namespace JobSeeker.WebAPI.Controllers
                 return NoContent();
             }
         }
+        //get single experience
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserExperiences>> GetJobSeeker(int id)
+        public async Task<ActionResult<UserExperiences>> GetExp(int id)
         {
             var item = await _expRepo.GetUser(id);
             if (item == null)
@@ -64,6 +69,13 @@ namespace JobSeeker.WebAPI.Controllers
             {
                 return Ok(item);
             }
+        }
+        //get all experiences of jobseeker
+        [HttpGet("all/{userid}")]
+
+        public ActionResult<List<UserExperiences>> GetAllExperience(int userid)
+        {
+            return Ok(_expRepo.GetAll(userid));
         }
     }
 }

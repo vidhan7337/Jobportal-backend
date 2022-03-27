@@ -8,5 +8,8 @@ namespace JobSeeker.WebAPI.Repositories
     {
         Task<UserVacancyRequests> AddRequest(UserVacancyRequests user);
         List<UserModel> GetJobseeker(int id);
+        bool Requestaleradyexsits(int vacid, int userid);
+
+        List<int> GetVacancyIdApplied(int userid);
     }
 }

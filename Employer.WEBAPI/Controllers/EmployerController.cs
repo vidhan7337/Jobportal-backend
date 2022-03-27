@@ -18,8 +18,8 @@ namespace Employer.WEBAPI.Controllers
             _repository = repo;
         }
 
-        //GET/ api/employeer
-        //[Authorize(Roles = "Employer")]
+        //add employer profile
+       
         [HttpPost]
 
         public async Task<ActionResult<EmployerDetails>> AddEmployeer(EmployerDetails employeer)
@@ -35,8 +35,8 @@ namespace Employer.WEBAPI.Controllers
                 return Created("Success", result);
             }
         }
-
-        //[Authorize(Roles = "Employer")]
+        //update employer profile
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEmployeer([FromBody] EmployerDetails employeer, [FromRoute] int id)
         {
@@ -44,11 +44,21 @@ namespace Employer.WEBAPI.Controllers
             return Ok();
         }
 
-        //[Authorize(Roles = "JobSeeker")]
+        //get employer details
         [HttpGet("{email}")]
-        public async Task<ActionResult<EmployerDetails>> GetEmployerByID(string email)
+        public async Task<ActionResult<EmployerDetails>> GetEmployerByEmail(string email)
         {
             var item = await _repository.GetEmployerByIDAsync(email);
+            if (item == null)
+                return NotFound();
+            else
+                return Ok(item);
+        }
+        //get employer details for jobseeker
+        [HttpGet("/viewcompany/{org}")]
+        public async Task<ActionResult<EmployerDetails>> GetEmployerByName(string org)
+        {
+            var item = await _repository.GetEmployerByNameAsync(org);
             if (item == null)
                 return NotFound();
             else

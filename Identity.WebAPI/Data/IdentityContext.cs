@@ -10,7 +10,7 @@ namespace Identity.WebAPI.Data
     {
             public IdentityContext(DbContextOptions<IdentityContext> options) : base(options) { }
             public DbSet<UserIdentity> UserIdentity { get; set; }
-
+        //making unique fields
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<UserIdentity>()

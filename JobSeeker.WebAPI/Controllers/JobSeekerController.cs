@@ -20,6 +20,7 @@ namespace JobSeeker.WebAPI.Controllers
             _qualiRepo = qua;
             _expRepo = ex;
         }
+        //adding new jobseeker profile
         [HttpPost]
         public async Task<ActionResult<UserModel>> AddJobseeker(UserModel user)
         {
@@ -34,12 +35,14 @@ namespace JobSeeker.WebAPI.Controllers
                 return Created("Success", result);
             }
         }
+        //updating jobseeker profile
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateJobseeker([FromBody]UserModel user,[FromRoute]int id)
         {
             await _userRepo.UpdateUser(id, user);
             return Ok();
         }
+        //delete jobseeker profile
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJobSeeker(int id)
         {
@@ -54,6 +57,7 @@ namespace JobSeeker.WebAPI.Controllers
                 return NoContent();
             }
         }
+        //jobseeker profile using id
         [HttpGet("{id}")]
         public async Task<ActionResult<UserModel>> GetJobSeeker(int id)
         {
@@ -66,6 +70,16 @@ namespace JobSeeker.WebAPI.Controllers
             {
                 return Ok(item);
             }
+        }
+        //jobseeker details using email for initial check when login
+        [HttpGet("getbyemail/{email}")]
+        public async Task<ActionResult<UserModel>> GetJobSeekerByemail(string email)
+        {
+            var item = await _userRepo.GetJobSeekerByIDAsync(email);
+            if (item == null)
+                return NotFound();
+            else
+                return Ok(item);
         }
     }
 }

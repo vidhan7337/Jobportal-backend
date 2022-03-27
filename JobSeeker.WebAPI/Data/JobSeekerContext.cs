@@ -11,6 +11,7 @@ namespace JobSeeker.WebAPI.Data
         public DbSet<Qualifications> Qualifications { get; set; }
         public DbSet<UserExperiences> UserExperiences { get; set; }
         public DbSet<UserVacancyRequests> UserVacancyRequests { get; set; }
+        //unique column
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<UserModel>()

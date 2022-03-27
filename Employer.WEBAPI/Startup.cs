@@ -32,20 +32,24 @@ namespace Employer.WEBAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //adding database
             services.AddDbContext<EmployerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EmployerDb")));
             services.AddControllers();
+            //adding repository
             services.AddScoped<IVacancyRepository, VacancyRepository>();
             services.AddScoped<IEmployerRepository, EmployerRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Employer.WEBAPI", Version = "v1" });
             });
+            //adding cors
             services.AddCors(config =>
             {
                 config.AddDefaultPolicy(c => {
                     c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
+            //authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters()

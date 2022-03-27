@@ -32,7 +32,7 @@ namespace Identity.WebAPI.Controllers
             configuration = _configuration;
             
         }
-
+        //changepassword of user
         [HttpPut("changepassword/{id}")]
         public async Task<IActionResult> ChangePassword([FromBody]UserIdentity user,[FromRoute]int id)
         {
@@ -56,6 +56,7 @@ namespace Identity.WebAPI.Controllers
             }
         }
         
+        //registering new user
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserIdentity user)
         {
@@ -71,7 +72,7 @@ namespace Identity.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
         }
-
+        //login api through login model
         [HttpPost("login")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -98,7 +99,7 @@ namespace Identity.WebAPI.Controllers
                 }
             }
         }
-
+        //generating token
         private string GetToken(UserIdentity user)
         {
             var claims = new List<Claim>
@@ -108,6 +109,8 @@ namespace Identity.WebAPI.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
             claims.Add(new Claim(JwtRegisteredClaimNames.Aud, configuration.GetValue<string>("Jwt:Audience")));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Aud,"Api.Gateway"));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Aud, "JobSeeker.WebAPI"));
             claims.Add(new Claim(ClaimTypes.Role, user.UserType));
 
 
@@ -122,6 +125,16 @@ namespace Identity.WebAPI.Controllers
                 signingCredentials: credentials
              );
             return new JwtSecurityTokenHandler().WriteToken(token);
+
+        }
+        [HttpGet("getpassword/{id}")]
+
+        //getting old password to change new password
+        public string Getpassword(int id)
+        {
+            var pass = db.UserIdentity.Single(e=>e.Id==id);
+
+            return pass.Password;
 
         }
     }

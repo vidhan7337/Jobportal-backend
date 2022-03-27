@@ -14,13 +14,14 @@ namespace JobSeeker.WebAPI.Repositories
             db = dbcontext;
             userModel=db.Set<UserModel>();
         }
-
+        //adding new jobseeker profile
         public async Task<UserModel> AddUser(UserModel user)
         {
             await userModel.AddAsync(user);
             await db.SaveChangesAsync();
             return user;
         }
+        //updating jobseeker profile
         public async Task UpdateUser(int id, UserModel user)
         {
             var seeker = await userModel.FindAsync(id);
@@ -38,15 +39,23 @@ namespace JobSeeker.WebAPI.Repositories
                 await db.SaveChangesAsync();
             }
         }
+        //delete jobseeker profile
         public async Task DeleteUser(int id)
         {
             var item = await userModel.FindAsync(id);
             userModel.Remove(item);
             await db.SaveChangesAsync();
         }
+        //jobseeker profile using id
         public async Task<UserModel> GetUser(int id)
         {
             return await userModel.FindAsync(id);
+        }
+        //jobseeker details using email for initial check when login
+        public async Task<UserModel> GetJobSeekerByIDAsync(string email)
+        {
+            var item = await userModel.SingleOrDefaultAsync(e => e.Email == email);
+            return item;
         }
 
     }

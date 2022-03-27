@@ -1,6 +1,6 @@
 {
   "Routes": [
-    //vacancies
+    
     {
       "DownstreamPathTemplate": "/api/Vacancies",
       "DownstreamScheme": "https",
@@ -65,7 +65,7 @@
       "UpstreamPathTemplate": "/gateway/vacancies/submitted/{org}",
       "UpstreamHttpMethod": [ "GET" ]
     },
-    //employer
+    
     {
       "DownstreamPathTemplate": "/api/Employer",
       "DownstreamScheme": "https",
@@ -130,7 +130,7 @@
       "UpstreamPathTemplate": "/gateway/viewcompany/{org}",
       "UpstreamHttpMethod": [ "GET" ]
     },
-    //identity module
+    
     {
       "DownstreamPathTemplate": "/api/Identity/login",
       "DownstreamScheme": "https",
@@ -180,7 +180,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
 
-    //jobseeker
+    
     {
       "DownstreamPathTemplate": "/api/JobSeeker/{id}",
       "DownstreamScheme": "https",
@@ -233,7 +233,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
 
-    //qualification
+    
     {
       "DownstreamPathTemplate": "/api/Qualification/{id}",
       "DownstreamScheme": "https",
@@ -284,7 +284,7 @@
       "UpstreamPathTemplate": "/gateway/qualification/all/{userid}",
       "UpstreamHttpMethod": [ "GET" ]
     },
-    //experience
+    
     {
       "DownstreamPathTemplate": "/api/UserExperince/{id}",
       "DownstreamScheme": "https",
@@ -334,7 +334,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
 
-    //vacancy request
+    
 
     {
       "DownstreamPathTemplate": "/api/VacancyRequestContoller/{id}",

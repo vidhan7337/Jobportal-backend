@@ -1,6 +1,6 @@
 ﻿using Identity.WebAPI.Data;
 using Identity.WebAPI.Models;
-
+using Identity.WebAPI.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -21,33 +21,24 @@ namespace Identity.WebAPI.Controllers
     [ApiController]
     public class IdentityController : ControllerBase
     {
-        private readonly IdentityContext db;
-        private IConfiguration configuration;
+
+
+        private IUserIdentityRepository _repo;
         
 
 
-        public IdentityController(IdentityContext dbContext, IConfiguration _configuration)
+        public IdentityController(IUserIdentityRepository repository)
         {
-            db = dbContext;
-            configuration = _configuration;
+            _repo= repository;
             
         }
         //changepassword of user
         [HttpPut("changepassword/{id}")]
-        public async Task<IActionResult> ChangePassword([FromBody]UserIdentity user,[FromRoute]int id)
+        public IActionResult ChangePassword([FromBody] UserIdentity user, [FromRoute] int id)
         {
-            var a = await db.UserIdentity.FindAsync(id);
+            var a = _repo.ChangePassword(id, user);
             if (a != null)
             {
-                a.UserName = user.UserName;
-                a.Password = user.Password;
-                a.FullName = user.FullName;
-                a.Email = user.Email;
-                a.Phone = user.Phone;
-                a.UserType = user.UserType;
-
-                db.UserIdentity.Update(a);
-                await db.SaveChangesAsync();
                 return Ok();
             }
             else
@@ -55,17 +46,16 @@ namespace Identity.WebAPI.Controllers
                 return BadRequest();
             }
         }
-        
+
         //registering new user
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserIdentity user)
+        public IActionResult Register(UserIdentity user)
         {
             TryValidateModel(user);
             if (ModelState.IsValid)
             {
-                await db.UserIdentity.AddAsync(user);
-                await db.SaveChangesAsync();
-                return Created("", new {FullName = user.FullName, UserName = user.UserName, Email = user.Email, Phone = user.Phone, UserType = user.UserType });
+                _repo.RegisterUser(user);
+                return Created("", new { FullName = user.FullName, UserName = user.UserName, Email = user.Email, Phone = user.Phone, UserType = user.UserType });
             }
             else
             {
@@ -86,7 +76,7 @@ namespace Identity.WebAPI.Controllers
             }
             else
             {
-                var user = db.UserIdentity.SingleOrDefault(u => u.UserName == credentials.UserName && u.Password == credentials.Password);
+                UserIdentity user = _repo.LoginUser(credentials);
                 if (user == null)
                 {
                     return Unauthorized();
@@ -94,47 +84,21 @@ namespace Identity.WebAPI.Controllers
                 }
                 else
                 {
-                    var tokenString = GetToken(user);
+                    var tokenString = _repo.GetToken(user);
                     return Ok(new { id=user.Id,email=user.Email,phone=user.Phone, FullName = user.FullName,password=user.Password, UserName = user.UserName, userType=user.UserType,tokenString });
                 }
             }
         }
         //generating token
-        private string GetToken(UserIdentity user)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.FullName),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            };
-            claims.Add(new Claim(JwtRegisteredClaimNames.Aud, configuration.GetValue<string>("Jwt:Audience")));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Aud,"Api.Gateway"));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Aud, "JobSeeker.WebAPI"));
-            claims.Add(new Claim(ClaimTypes.Role, user.UserType));
-
-
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:Secret")));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                issuer:configuration.GetValue<string>("Jwt:Issuer"),
-                audience:null,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(1440),
-                signingCredentials: credentials
-             );
-            return new JwtSecurityTokenHandler().WriteToken(token);
-
-        }
+        
         [HttpGet("getpassword/{id}")]
 
         //getting old password to change new password
         public string Getpassword(int id)
         {
-            var pass = db.UserIdentity.Single(e=>e.Id==id);
+            var pass= _repo.GetPassword(id);
 
-            return pass.Password;
+            return pass;
 
         }
     }

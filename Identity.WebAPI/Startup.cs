@@ -1,4 +1,5 @@
 using Identity.WebAPI.Data;
+using Identity.WebAPI.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +29,7 @@ namespace Identity.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<IUserIdentityRepository, UserIdentityRepository>();
             services.AddControllers();
             services.AddDbContext<IdentityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityDb")));
             services.AddSwaggerGen(c =>
